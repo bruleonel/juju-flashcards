@@ -1,0 +1,16 @@
+<h1>Juju Flashcards</h1>
+
+<!-- Componente para criar/editar cards -->
+<app-card-editor></app-card-editor>
+
+<hr>
+<h3>Cards Salvos</h3>
+<ul>
+  <li *ngFor="let card of cards">
+    {{ card.frontText }} - {{ card.backText }}
+  </li>
+</ul>
+
+<!-- Componente para listar cards salvos -->
+<app-card-list></app-card-list>
+

@@ -1,0 +1,25 @@
+<div class="card-editor">
+    <h2>Criar Novo Card</h2>
+  
+    <label>
+      Frente:
+      <input [(ngModel)]="frontText" placeholder="Texto da frente" />
+    </label>
+  
+    <label>
+      Verso:
+      <input [(ngModel)]="backText" placeholder="Texto do verso" />
+    </label>
+  
+    <div class="buttons">
+      <button (click)="record('front')">🎤 Gravar Frente</button>
+      <button (click)="record('back')">🎤 Gravar Verso</button>
+      <button (click)="saveCard()">💾 Salvar Card</button>
+    </div>
+  
+    <div class="audio-status">
+      <p *ngIf="frontAudioBlob">✅ Áudio da frente gravado</p>
+      <p *ngIf="backAudioBlob">✅ Áudio do verso gravado</p>
+    </div>
+  </div>
+  
