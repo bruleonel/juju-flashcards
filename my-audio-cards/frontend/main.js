@@ -34,6 +34,14 @@ ipcMain.on('save-card', (event, cardData) => {
   fs.writeFileSync(path.join(dir, `${id}_front.webm`), Buffer.from(cardData.frontAudio, 'base64'));
   fs.writeFileSync(path.join(dir, `${id}_back.webm`), Buffer.from(cardData.backAudio, 'base64'));
 
+  if (cardData.frontImage) {
+    fs.writeFileSync(path.join(dir, `${id}_front.png`), Buffer.from(cardData.frontImage, 'base64'));
+  }
+  if (cardData.backImage) {
+    fs.writeFileSync(path.join(dir, `${id}_back.png`), Buffer.from(cardData.backImage, 'base64'));
+  }
+
+
   console.log('Card salvo:', id);
 });
 

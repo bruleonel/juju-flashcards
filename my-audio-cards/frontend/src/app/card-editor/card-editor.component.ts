@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-card-editor',
   templateUrl: './card-editor.component.html',
+  styleUrls: ['./card-editor.component.css'],
 })
 export class CardEditorComponent {
   frontText = '';
@@ -10,10 +11,34 @@ export class CardEditorComponent {
   frontAudioBlob: Blob | null = null;
   backAudioBlob: Blob | null = null;
 
+  frontImageBase64: string | null = null;  
+  backImageBase64: string | null = null;   
+
   private mediaRecorder: MediaRecorder | null = null;
   private chunks: Blob[] = [];
   private currentSide: 'front' | 'back' | null = null;
 
+  onFrontImageSelected(event: any) {
+    const file = event.target.files[0];
+    this.readImageAsBase64(file).then(base64 => this.frontImageBase64 = base64);
+  }
+
+  onBackImageSelected(event: any) {
+    const file = event.target.files[0];
+    this.readImageAsBase64(file).then(base64 => this.backImageBase64 = base64);
+  }
+
+  readImageAsBase64(file: File): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const result = reader.result as string;
+        resolve(result.split(',')[1]);
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  }
   async record(side: 'front' | 'back') {
     if (this.mediaRecorder) {
       this.mediaRecorder.stop();
@@ -67,6 +92,8 @@ export class CardEditorComponent {
           backText: this.backText,
           frontAudio: frontAudioBase64,
           backAudio: backAudioBase64,
+          frontImage: this.frontImageBase64, 
+          backImage: this.backImageBase64,   
         };
 
         (window as any).electronAPI.saveCard(cardData);

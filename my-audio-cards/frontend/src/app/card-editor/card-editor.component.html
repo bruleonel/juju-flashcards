@@ -11,6 +11,14 @@
       <input [(ngModel)]="backText" placeholder="Texto do verso" />
     </label>
   
+    <label>Imagem da Frente:
+      <input type="file" (change)="onFrontImageSelected($event)" accept="image/*" />
+    </label>
+    
+    <label>Imagem do Verso:
+      <input type="file" (change)="onBackImageSelected($event)" accept="image/*" />
+    </label>
+    
     <div class="buttons">
       <button (click)="record('front')">🎤 Gravar Frente</button>
       <button (click)="record('back')">🎤 Gravar Verso</button>

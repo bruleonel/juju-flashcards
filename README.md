@@ -68,6 +68,10 @@ Tocar áudio dos cards
 | `npm run electron-build` | Empacota app com Electron Builder    |
 | `npm run build-all`      | Build Angular + empacotamento juntos |
 
+ng build
+ng build --configuration production --base-href
+npx electron .
+
 
 ⚠️ Avisos importantes
 
