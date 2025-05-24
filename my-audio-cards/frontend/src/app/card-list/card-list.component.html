@@ -1,9 +1,11 @@
-<p>card-list works!</p>
-<h2>Cards Salvos</h2>
-<ul>
-  <li *ngFor="let card of cards">
-    <strong>{{ card.frontText }}</strong> - {{ card.backText }}
-    <button (click)="playAudio(card.frontAudioPath)">▶ Frente</button>
-    <button (click)="playAudio(card.backAudioPath)">▶ Verso</button>
-  </li>
-</ul>
+<div class="card-container">
+  <div *ngFor="let card of cards" class="card">
+    <p><strong>Frente:</strong> {{ card.frontText || 'Sem texto' }}</p>
+    <p><strong>Verso:</strong> {{ card.backText || 'Sem texto' }}</p>
+
+    <button *ngIf="card.frontAudioPath" (click)="playAudio(card.frontAudioPath)">Tocar Frente</button>
+    <button *ngIf="card.backAudioPath" (click)="playAudio(card.backAudioPath)">Tocar Verso</button>
+
+    <button (click)="deleteCard(card.id)">Excluir</button>
+  </div>
+</div>
